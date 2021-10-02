@@ -12,11 +12,24 @@ configure_file(version.h.in version.h)
 add_executable(helloworld_cli main.cpp)
 add_library(helloworld lib.cpp)
 add_executable(test_version test_version.cpp)
+add_executable(gtest_version gtest_version.cpp)
 
 set_target_properties(helloworld_cli helloworld test_version PROPERTIES
     CXX_STANDARD 14
     CXX_STANDARD_REQUIRED ON
 )
+
+# Google Test
+include(FetchContent)
+FetchContent_Declare(
+  googletest
+  URL https://github.com/google/googletest/archive/609281088cfefc76f9d0ce82e1ff6c30cc3591e5.zip
+)
+# For Windows: Prevent overriding the parent project's compiler/linker settings
+set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+FetchContent_MakeAvailable(googletest)
+# Google Test <-- end
+
 target_include_directories(helloworld
     PRIVATE "${CMAKE_BINARY_DIR}"
 )
@@ -32,6 +45,14 @@ target_link_libraries(test_version
     ${Boost_LIBRARIES}
     helloworld
 )
+target_link_libraries(
+  gtest_version
+  gtest_main
+  helloworld
+)
+
+include(GoogleTest)
+gtest_discover_tests(gtest_version)
 
 if (MSVC)
     target_compile_options(helloworld_cli PRIVATE
@@ -72,3 +93,4 @@ include(CPack)
 enable_testing()
 
 add_test(test_version test_version)
+add_test(gtest_version gtest_version)
