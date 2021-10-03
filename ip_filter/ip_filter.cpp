@@ -1,6 +1,7 @@
 #include <cassert>
 #include <cstdlib>
 #include <iostream>
+#include <list>
 #include "ipaddr.h"
 
 int main()
@@ -8,14 +9,14 @@ int main()
     try {
 
         // Input
-        std::vector<IpAddr> ip_pool;
+        std::list<IpAddr> ip_pool;
         for(std::string line; std::getline(std::cin, line);) {
             std::vector<std::string> v = IpAddr::split(line, '\t');
             ip_pool.push_back(IpAddr(v.at(0)));
         }
 
         // Reverse lexicographically sort
-        std::sort(ip_pool.begin(), ip_pool.end());
+        ip_pool.sort();
 
         // 222.173.235.246
         // 222.130.177.64
