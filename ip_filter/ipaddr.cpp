@@ -47,19 +47,19 @@ std::string IpAddr::ipAddr() const
 }
 
 // Filter by first byte
-bool IpAddr::filter(int &&first_byte) const
+bool IpAddr::filter(unsigned int &&first_byte) const
 {
     return this->byte(0) == first_byte;
 }
 
 // Filter by first and second bytes
-bool IpAddr::filter(int &&first_byte, int &&second_byte) const
+bool IpAddr::filter(unsigned int &&first_byte, unsigned int &&second_byte) const
 {
     return this->byte(0) == first_byte && this->byte(1) == second_byte;
 }
 
 // Filter by any byte
-bool IpAddr::filter_any(int &&any_byte) const
+bool IpAddr::filter_any(unsigned int &&any_byte) const
 {
     return this->byte(0) == any_byte
             || this->byte(1) == any_byte
@@ -80,12 +80,4 @@ IpAddr& IpAddr::operator=(const IpAddr &other)
     }
     m_value = other.m_value;
     return *this;
-}
-
-int IpAddr::byte(const int &number) const
-{
-    if (number >= 0 && number < BytesInIpAddr) {
-        return (m_value >> ((BytesInIpAddr - number - 1) * SizeOfByte) & 0xFF);
-    }
-    return 0;
 }

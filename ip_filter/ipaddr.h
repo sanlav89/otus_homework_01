@@ -24,13 +24,13 @@ public:
     std::string ipAddr() const;
 
     // Filter by first byte
-    bool filter(int &&first_byte) const;
+    bool filter(unsigned int &&first_byte) const;
 
     // Filter by first and second bytes
-    bool filter(int &&first_byte, int &&second_byte) const;
+    bool filter(unsigned int &&first_byte, unsigned int &&second_byte) const;
 
     // Filter by any byte
-    bool filter_any(int &&any_byte) const;
+    bool filter_any(unsigned int &&any_byte) const;
 
     bool operator<(const IpAddr &other);
     IpAddr& operator=(const IpAddr &other);
@@ -40,7 +40,13 @@ private:
     static const int SizeOfByte = 8;
     unsigned int m_value;
 
-    int byte(const int &number) const;
+    auto byte(const int &number) const
+    {
+        if (number >= 0 && number < BytesInIpAddr) {
+            return (m_value >> ((BytesInIpAddr - number - 1) * SizeOfByte) & 0xFF);
+        }
+        return 0u;
+    }
 
 };
 

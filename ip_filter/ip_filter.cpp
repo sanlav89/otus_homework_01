@@ -24,7 +24,7 @@ int main()
         // 1.70.44.170
         // 1.29.168.152
         // 1.1.234.8
-        for (std::vector<IpAddr>::const_iterator ip = ip_pool.cbegin(); ip != ip_pool.end(); ++ip) {
+        for (auto ip = ip_pool.cbegin(); ip != ip_pool.end(); ++ip) {
             std::cout << ip->ipAddr() << std::endl;
         }
 
@@ -36,7 +36,7 @@ int main()
         // 1.70.44.170
         // 1.29.168.152
         // 1.1.234.8
-        for (std::vector<IpAddr>::const_iterator ip = ip_pool.cbegin(); ip != ip_pool.end(); ++ip) {
+        for (auto ip = ip_pool.cbegin(); ip != ip_pool.end(); ++ip) {
             if (ip->filter(1)) {
                 std::cout << ip->ipAddr() << std::endl;
             }
@@ -49,7 +49,7 @@ int main()
         // 46.70.147.26
         // 46.70.113.73
         // 46.70.29.76
-        for (std::vector<IpAddr>::const_iterator ip = ip_pool.cbegin(); ip != ip_pool.end(); ++ip) {
+        for (auto ip = ip_pool.cbegin(); ip != ip_pool.end(); ++ip) {
             if (ip->filter(46, 70)) {
                 std::cout << ip->ipAddr() << std::endl;
             }
@@ -92,7 +92,7 @@ int main()
         // 46.49.43.85
         // 39.46.86.85
         // 5.189.203.46
-        for (std::vector<IpAddr>::const_iterator ip = ip_pool.cbegin(); ip != ip_pool.end(); ++ip) {
+        for (auto ip = ip_pool.cbegin(); ip != ip_pool.end(); ++ip) {
             if (ip->filter_any(46)) {
                 std::cout << ip->ipAddr() << std::endl;
             }
