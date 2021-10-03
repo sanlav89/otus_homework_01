@@ -13,6 +13,11 @@ add_executable(helloworld_cli main.cpp)
 add_library(helloworld lib.cpp)
 add_executable(test_version test_version.cpp)
 add_executable(gtest_version gtest_version.cpp)
+add_executable(ip_filter
+    ${PROJECT_SOURCE_DIR}/ip_filter/ip_filter.cpp
+    ${PROJECT_SOURCE_DIR}/ip_filter/ipaddr.cpp
+    ${PROJECT_SOURCE_DIR}/ip_filter/ipaddr.h
+    )
 
 set_target_properties(helloworld_cli helloworld test_version PROPERTIES
     CXX_STANDARD 14
