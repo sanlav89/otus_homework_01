@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.2)
 set(PATCH_VERSION "1" CACHE INTERNAL "Patch version")
 set(PROJECT_VESRION 0.0.${PATCH_VERSION})
 
-project(helloworld VERSION ${PROJECT_VESRION})
+project(ip_filter VERSION ${PROJECT_VESRION})
 
 find_package(Boost COMPONENTS unit_test_framework REQUIRED)
 
@@ -24,7 +24,14 @@ add_executable(gtest_ipaddr
     ${PROJECT_SOURCE_DIR}/ip_filter/ipaddr.h
     )
 
-set_target_properties(helloworld_cli helloworld test_version PROPERTIES
+set_target_properties(
+    helloworld_cli
+    helloworld
+    test_version
+    gtest_version
+    ip_filter
+    gtest_ipaddr
+    PROPERTIES
     CXX_STANDARD 14
     CXX_STANDARD_REQUIRED ON
 )
@@ -78,6 +85,15 @@ if (MSVC)
     target_compile_options(test_version PRIVATE
         /W4
     )
+    target_compile_options(gtest_version PRIVATE
+        /W4
+    )
+    target_compile_options(ip_filter PRIVATE
+        /W4
+    )
+    target_compile_options(gtest_ipaddr PRIVATE
+        /W4
+    )
 else ()
     target_compile_options(helloworld_cli PRIVATE
         -Wall -Wextra -pedantic -Werror
@@ -88,11 +104,21 @@ else ()
     target_compile_options(test_version PRIVATE
         -Wall -Wextra -pedantic -Werror
     )
+    target_compile_options(gtest_version PRIVATE
+        -Wall -Wextra -pedantic -Werror
+    )
+    target_compile_options(ip_filter PRIVATE
+        -Wall -Wextra -pedantic -Werror
+    )
+    target_compile_options(gtest_ipaddr PRIVATE
+        -Wall -Wextra -pedantic -Werror
+    )
 endif()
 
 
 
-install(TARGETS helloworld_cli RUNTIME DESTINATION bin)
+#install(TARGETS helloworld_cli RUNTIME DESTINATION bin)
+install(TARGETS ip_filter RUNTIME DESTINATION bin)
 
 set(CPACK_GENERATOR DEB)
 
