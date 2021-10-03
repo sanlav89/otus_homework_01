@@ -18,6 +18,11 @@ add_executable(ip_filter
     ${PROJECT_SOURCE_DIR}/ip_filter/ipaddr.cpp
     ${PROJECT_SOURCE_DIR}/ip_filter/ipaddr.h
     )
+add_executable(gtest_ipaddr
+    ${PROJECT_SOURCE_DIR}/ip_filter/gtest_ipaddr.cpp
+    ${PROJECT_SOURCE_DIR}/ip_filter/ipaddr.cpp
+    ${PROJECT_SOURCE_DIR}/ip_filter/ipaddr.h
+    )
 
 set_target_properties(helloworld_cli helloworld test_version PROPERTIES
     CXX_STANDARD 14
@@ -55,9 +60,13 @@ target_link_libraries(
   gtest_main
   helloworld
 )
+target_link_libraries(gtest_ipaddr
+  gtest_main
+)
 
 include(GoogleTest)
 gtest_discover_tests(gtest_version)
+gtest_discover_tests(gtest_ipaddr)
 
 if (MSVC)
     target_compile_options(helloworld_cli PRIVATE
@@ -99,3 +108,4 @@ enable_testing()
 
 add_test(test_version test_version)
 add_test(gtest_version gtest_version)
+add_test(gtest_ipaddr gtest_ipaddr)
