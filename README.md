@@ -9,13 +9,13 @@ cmake --build .
 cmake --build . --target test  
 cmake --build . --target package  
 
-# Первая часть
+# Первая часть  (release 3)
 ./helloworld_cli  
 # Output:
 Version: 123  
 Hello, World!  
 
-# Вторая часть
+# Вторая часть  (release 6)
 ./ip_filter < <path-to-ip_filter.tsv>/ip_filter.tsv  
 # Output
 222.173.235.246  
@@ -33,3 +33,6 @@ Hello, World!
 46.49.43.85  
 39.46.86.85  
 5.189.203.46  
+
+# Доп. задание по 'auto', 'tuple' (release 7)
+cd ./auto_tuple
