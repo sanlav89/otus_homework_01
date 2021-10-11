@@ -1,14 +1,28 @@
+# CMAKE VERSION
 cmake_minimum_required(VERSION 3.5)
 
+# PROJECT
 project(otus_homework_01 LANGUAGES CXX)
 
-#set(CMAKE_CXX_STANDARD 11)
-#set(CMAKE_CXX_STANDARD_REQUIRED ON)
+# SOURCES
+set (
+    SOURCES
+        main.cpp
+        lib.cpp
+)
 
-add_executable(otus_homework_01 main.cpp)
+# HEADERS
+set (
+    HEADERS
+        lib.h
+)
 
+# PROJECT
+add_executable(otus_homework_01 ${SOURCES} ${HEADERS})
+
+# PROPERTIES
 set_target_properties (
-        otus_homework_01 PROPERTIES
-        CMAKE_CXX_STANDARD 11
-        CMAKE_CXX_STANDARD_REQUIRED ON
+    otus_homework_01 PROPERTIES
+    CMAKE_CXX_STANDARD 11
+    CMAKE_CXX_STANDARD_REQUIRED ON
 )
