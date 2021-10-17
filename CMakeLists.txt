@@ -10,6 +10,7 @@ project(${PROJECT_NAME} VERSION ${PROJECT_VESRION})
 # SUBDIRECTORIES
 add_subdirectory(helloworld)
 add_subdirectory(ip_filter)
+add_subdirectory(auto_tuple)
 
 # CONFIGURE VERSION
 configure_file (

@@ -19,17 +19,11 @@ set (
 )
 
 # LIBRARIES
-#add_library(lib lib.cpp lib.h)
 
 # PROJECT
 add_executable(ip_filter ${SOURCES} ${HEADERS})
 
 # PROPERTIES
-#set_target_properties (
-#    lib PROPERTIES
-#    CMAKE_CXX_STANDARD 11
-#    CMAKE_CXX_STANDARD_REQUIRED ON
-#)
 set_target_properties (
     ip_filter PROPERTIES
     CMAKE_CXX_STANDARD 11
@@ -37,14 +31,6 @@ set_target_properties (
 )
 
 # INCLUDEPATH
-#target_include_directories (
-#    lib PUBLIC
-#    ${CMAKE_CURRENT_BINARY_DIR}/../
-#)
-#target_include_directories (
-#    ip_filter PUBLIC
-#    ${CMAKE_CURRENT_BINARY_DIR}/../
-#)
 
 # Linking
 
@@ -53,16 +39,10 @@ if (MSVC)
     target_compile_options(ip_filter PRIVATE
         /W4
     )
-#    target_compile_options(lib PRIVATE
-#        /W4
-#    )
 else ()
     target_compile_options(ip_filter PRIVATE
         -Wall -Wextra -pedantic -Werror
     )
-#    target_compile_options(lib PRIVATE
-#        -Wall -Wextra -pedantic -Werror
-#    )
 endif()
 
 ### Unit Tests
