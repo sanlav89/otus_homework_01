@@ -2,7 +2,9 @@
 cmake_minimum_required(VERSION 3.5)
 
 # PROJECT
-project(otus_homework_01 VERSION 0.0.1)
+set(PATCH_VERSION "12" CACHE INTERNAL "Patch version")
+set(PROJECT_VESRION 0.0.${PATCH_VERSION})
+project(otus_homework_01 VERSION ${PROJECT_VESRION})
 
 # SUBDIRECTORIES
 add_subdirectory(helloworld)

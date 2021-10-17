@@ -2,26 +2,21 @@
 cmake_minimum_required(VERSION 3.5)
 
 # PROJECT
-project(helloworld VERSION 0.0.1)
+set(PATCH_VERSION "1" CACHE INTERNAL "Patch version")
+set(PROJECT_VESRION 0.0.${PATCH_VERSION})
+project(helloworld VERSION ${PROJECT_VESRION})
 
 # SOURCES
-set (
-    SOURCES
-        main.cpp
-#        lib.cpp
-)
+set (SOURCES main.cpp)
 
 # HEADERS
-set (
-    HEADERS
-#        lib.h
-)
+
 
 # LIBRARIES
 add_library(lib lib.cpp lib.h)
 
 # PROJECT
-add_executable(helloworld lib ${SOURCES} ${HEADERS})
+add_executable(helloworld lib ${SOURCES})
 
 # PROPERTIES
 set_target_properties (
