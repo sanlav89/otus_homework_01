@@ -2,7 +2,6 @@
 cmake_minimum_required(VERSION 3.5)
 
 # PROJECT
-set(PATCH_VERSION "1" CACHE INTERNAL "Patch version")
 set(PROJECT_VESRION 0.0.${PATCH_VERSION})
 project(helloworld VERSION ${PROJECT_VESRION})
 
@@ -30,10 +29,6 @@ set_target_properties (
     CMAKE_CXX_STANDARD_REQUIRED ON
 )
 
-set(eee ${CMAKE_CURRENT_BINARY_DIR}/../)
-
-message("***** DIR: ${eee}")
-
 # INCLUDEPATH
 target_include_directories (
     lib PUBLIC
@@ -43,3 +38,59 @@ target_include_directories (
     helloworld PUBLIC
     ${CMAKE_CURRENT_BINARY_DIR}/../
 )
+
+# Linking
+
+# Compiler options
+if (MSVC)
+    target_compile_options(helloworld PRIVATE
+        /W4
+    )
+    target_compile_options(lib PRIVATE
+        /W4
+    )
+else ()
+    target_compile_options(helloworld PRIVATE
+        -Wall -Wextra -pedantic -Werror
+    )
+    target_compile_options(lib PRIVATE
+        -Wall -Wextra -pedantic -Werror
+    )
+endif()
+
+### Unit Tests
+
+# Boost package
+find_package(Boost COMPONENTS unit_test_framework REQUIRED)
+
+# GoogleTest package
+### TODO
+
+# Tests exe
+add_executable(test_version test_version.cpp)
+set_target_properties (
+    test_version
+        PROPERTIES
+            CMAKE_CXX_STANDARD 11
+            CMAKE_CXX_STANDARD_REQUIRED ON
+            COMPILE_DEFINITIONS BOOST_TEST_DYN_LINK
+            INCLUDE_DIRECTORIES ${Boost_INCLUDE_DIR}
+)
+
+target_link_libraries(
+    test_version
+    lib
+    ${Boost_LIBRARIES}
+)
+
+if (MSVC)
+    target_compile_options(test_version PRIVATE
+        /W4
+    )
+else ()
+    target_compile_options(test_version PRIVATE
+        -Wall -Wextra -pedantic -Werror
+    )
+endif()
+
+add_test(test_version test_version)
