@@ -12,10 +12,10 @@ TEST(IpAddr, IpAddr)
 TEST(IpAddr, filter)
 {
     IpAddr addr1 = IpAddr("192.168.0.1");
-    EXPECT_TRUE(addr1.byte(0) == 1);
-    EXPECT_TRUE(addr1.byte(1) == 0);
-    EXPECT_TRUE(addr1.byte(2) == 168);
-    EXPECT_TRUE(addr1.byte(3) == 192);
+    EXPECT_TRUE(addr1.byte(0) == 192);
+    EXPECT_TRUE(addr1.byte(1) == 168);
+    EXPECT_TRUE(addr1.byte(2) == 0);
+    EXPECT_TRUE(addr1.byte(3) == 1);
 }
 
 TEST(IpAddr, filter_any)
