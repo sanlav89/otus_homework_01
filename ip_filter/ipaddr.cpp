@@ -25,16 +25,23 @@ IpAddr::IpAddr(const IpAddr &other) : m_value(other.m_value)
 IpAddr::IpAddr(const std::string &ipAddr) : m_value(0)
 {
     std::vector<std::string> bytes = split(ipAddr, '.');
-    unsigned int value = 0;
+    auto value = 0;
     if (bytes.size() == BytesInIpAddr) {
         for (auto i = 0u; i < BytesInIpAddr; i++) {
-            value += std::stoi(bytes.at(i)) << ((bytes.size() - i - 1) * SizeOfByte);
+            if (!isValidByteValue(bytes.at(i))) {
+                throw std::string("ERROR! Incorrect format: ") + ipAddr;
+            }
+            auto byte = std::stoi(bytes.at(i));
+            if (!isValidByteValue(byte)) {
+                throw std::string("ERROR! Value of any byte can't be greater than 255: ") + ipAddr;
+            }
+            value += byte << ((bytes.size() - i - 1) * SizeOfByte);
         }
     }
     m_value = value;
 }
 
-std::string IpAddr::ipAddr() const
+std::string IpAddr::to_string() const
 {
     std::string result;
     for (auto i = 0; i < BytesInIpAddr; i++) {
@@ -44,28 +51,6 @@ std::string IpAddr::ipAddr() const
         }
     }
     return result;
-}
-
-// Filter by first byte
-bool IpAddr::filter(unsigned int &&first_byte) const
-{
-    return this->byte(0) == first_byte;
-}
-
-// Filter by first and second bytes
-bool IpAddr::filter(unsigned int &&first_byte, unsigned int &&second_byte) const
-{
-    return this->byte(0) == first_byte && this->byte(1) == second_byte;
-}
-
-// Filter by any byte
-bool IpAddr::filter_any(unsigned int &&any_byte) const
-{
-    return this->byte(0) == any_byte
-            || this->byte(1) == any_byte
-            || this->byte(2) == any_byte
-            || this->byte(3) == any_byte
-            ;
 }
 
 bool IpAddr::operator<(const IpAddr &other)
@@ -80,4 +65,25 @@ IpAddr& IpAddr::operator=(const IpAddr &other)
     }
     m_value = other.m_value;
     return *this;
+}
+
+bool IpAddr::isValidByteValue(const std::string &byte_str)
+{
+    if (byte_str.size() > 3) {
+        return false;
+    }
+    for (const auto &c : byte_str) {
+        if (!isdigit(c)) {
+            return false;
+        }
+    }
+    return true;
+}
+
+bool IpAddr::isValidByteValue(const unsigned int &byte)
+{
+    if (byte > 255) {
+        return false;
+    }
+    return true;
 }

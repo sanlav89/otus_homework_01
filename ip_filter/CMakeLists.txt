@@ -26,7 +26,7 @@ add_executable(ip_filter ${SOURCES} ${HEADERS})
 # PROPERTIES
 set_target_properties (
     ip_filter PROPERTIES
-    CMAKE_CXX_STANDARD 11
+    CMAKE_CXX_STANDARD 14
     CMAKE_CXX_STANDARD_REQUIRED ON
 )
 

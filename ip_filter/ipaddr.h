@@ -21,16 +21,15 @@ public:
     IpAddr(const IpAddr &other);
     IpAddr(const std::string &ipAddr);
 
-    std::string ipAddr() const;
+    std::string to_string() const;
 
-    // Filter by first byte
-    bool filter(unsigned int &&first_byte) const;
-
-    // Filter by first and second bytes
-    bool filter(unsigned int &&first_byte, unsigned int &&second_byte) const;
-
-    // Filter by any byte
-    bool filter_any(unsigned int &&any_byte) const;
+    auto byte(const int &number) const
+    {
+        if (number >= 0 && number < BytesInIpAddr) {
+            return (m_value >> ((BytesInIpAddr - number - 1) * SizeOfByte) & 0xFF);
+        }
+        return 0;
+    }
 
     bool operator<(const IpAddr &other);
     IpAddr& operator=(const IpAddr &other);
@@ -38,15 +37,10 @@ public:
 private:
     static const int BytesInIpAddr = 4;
     static const int SizeOfByte = 8;
-    unsigned int m_value;
+    int m_value;
 
-    auto byte(const int &number) const
-    {
-        if (number >= 0 && number < BytesInIpAddr) {
-            return (m_value >> ((BytesInIpAddr - number - 1) * SizeOfByte) & 0xFF);
-        }
-        return 0u;
-    }
+    bool isValidByteValue(const std::string &byte_str);
+    bool isValidByteValue(const unsigned int &byte);
 
 };
 
