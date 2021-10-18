@@ -28,7 +28,7 @@ public:
         if (number >= 0 && number < BytesInIpAddr) {
             return (m_value >> ((BytesInIpAddr - number - 1) * SizeOfByte) & 0xFF);
         }
-        return 0;
+        return 0u;
     }
 
     bool operator<(const IpAddr &other);
@@ -37,7 +37,7 @@ public:
 private:
     static const int BytesInIpAddr = 4;
     static const int SizeOfByte = 8;
-    int m_value;
+    unsigned int m_value;
 
     bool isValidByteValue(const std::string &byte_str);
     bool isValidByteValue(const unsigned int &byte);
