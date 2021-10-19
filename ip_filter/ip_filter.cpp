@@ -4,6 +4,8 @@
 #include <list>
 #include "ipaddr.h"
 
+using ip_byte_t = unsigned int;
+
 int main()
 {
     try {
@@ -24,7 +26,7 @@ int main()
             }
         };
 
-        auto filter1 = [&ip_pool](const unsigned int &first_byte)
+        auto filter1 = [&ip_pool](const ip_byte_t &first_byte)
         {
             for (const auto &ip : ip_pool) {
                 if (ip.byte(0) == first_byte) {
@@ -33,7 +35,7 @@ int main()
             }
         };
 
-        auto filter2 = [&ip_pool](const unsigned int &first_byte, const unsigned int & second_byte)
+        auto filter2 = [&ip_pool](const ip_byte_t &first_byte, const ip_byte_t & second_byte)
         {
             for (const auto &ip : ip_pool) {
                 if (ip.byte(0) == first_byte && ip.byte(1) == second_byte) {
@@ -42,7 +44,7 @@ int main()
             }
         };
 
-        auto filter_any = [&ip_pool](const unsigned int &any_byte)
+        auto filter_any = [&ip_pool](const ip_byte_t &any_byte)
         {
             for (const auto &ip : ip_pool) {
                 if (ip.byte(0) == any_byte
