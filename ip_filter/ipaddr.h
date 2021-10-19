@@ -32,7 +32,7 @@ public:
     }
 
     bool operator<(const IpAddr &other);
-    IpAddr& operator=(const IpAddr &other);
+    IpAddr& operator=(const IpAddr &other) = default;
 
 private:
     static const int BytesInIpAddr = 4;

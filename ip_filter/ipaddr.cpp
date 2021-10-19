@@ -14,15 +14,18 @@ std::vector<std::string> IpAddr::split(const std::string &str, char d)
     return r;
 }
 
-IpAddr::IpAddr() : m_value(0)
+IpAddr::IpAddr() :
+    m_value{0}
 {
 }
 
-IpAddr::IpAddr(const IpAddr &other) : m_value(other.m_value)
+IpAddr::IpAddr(const IpAddr &other) :
+    m_value{other.m_value}
 {
 }
 
-IpAddr::IpAddr(const std::string &ipAddr) : m_value(0)
+IpAddr::IpAddr(const std::string &ipAddr)
+    : m_value{0}
 {
     std::vector<std::string> bytes = split(ipAddr, '.');
     auto value = 0;
@@ -56,15 +59,6 @@ std::string IpAddr::to_string() const
 bool IpAddr::operator<(const IpAddr &other)
 {
     return m_value > other.m_value;
-}
-
-IpAddr& IpAddr::operator=(const IpAddr &other)
-{
-    if (this == &other) {
-        return *this;
-    }
-    m_value = other.m_value;
-    return *this;
 }
 
 bool IpAddr::isValidByteValue(const std::string &byte_str)

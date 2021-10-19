@@ -19,38 +19,38 @@ int main()
         // Filter functions:
         auto without_filter = [&ip_pool]()
         {
-            for (auto ip = ip_pool.cbegin(); ip != ip_pool.cend(); ++ip) {
-                std::cout << ip->to_string() << std::endl;
+            for (const auto &ip : ip_pool) {
+                std::cout << ip.to_string() << std::endl;
             }
         };
 
         auto filter1 = [&ip_pool](const unsigned int &first_byte)
         {
-            for (auto ip = ip_pool.cbegin(); ip != ip_pool.end(); ++ip) {
-                if (ip->byte(0) == first_byte) {
-                    std::cout << ip->to_string() << std::endl;
+            for (const auto &ip : ip_pool) {
+                if (ip.byte(0) == first_byte) {
+                    std::cout << ip.to_string() << std::endl;
                 }
             }
         };
 
         auto filter2 = [&ip_pool](const unsigned int &first_byte, const unsigned int & second_byte)
         {
-            for (auto ip = ip_pool.cbegin(); ip != ip_pool.end(); ++ip) {
-                if (ip->byte(0) == first_byte && ip->byte(1) == second_byte) {
-                    std::cout << ip->to_string() << std::endl;
+            for (const auto &ip : ip_pool) {
+                if (ip.byte(0) == first_byte && ip.byte(1) == second_byte) {
+                    std::cout << ip.to_string() << std::endl;
                 }
             }
         };
 
         auto filter_any = [&ip_pool](const unsigned int &any_byte)
         {
-            for (auto ip = ip_pool.begin(); ip != ip_pool.end(); ++ip) {
-                if (ip->byte(0) == any_byte
-                        || ip->byte(1) == any_byte
-                        || ip->byte(2) == any_byte
-                        || ip->byte(3) == any_byte
+            for (const auto &ip : ip_pool) {
+                if (ip.byte(0) == any_byte
+                        || ip.byte(1) == any_byte
+                        || ip.byte(2) == any_byte
+                        || ip.byte(3) == any_byte
                         ) {
-                    std::cout << ip->to_string() << std::endl;
+                    std::cout << ip.to_string() << std::endl;
                 }
             }
         };
